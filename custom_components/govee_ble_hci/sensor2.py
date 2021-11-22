@@ -342,11 +342,11 @@ if __name__ == "__main__":
         CONF_GOVEE_DEVICES: [
             {
                 'mac': 'E3:8C:81:90:A0:A0',
-                'name': 'Govee_H5179_A0A0',
+                'name': 'Govee_H5179_Salon',
             },
             {
                 'mac': 'E3:8C:81:92:B4:D0',
-                'name': 'Govee_H5179_B4D0',
+                'name': 'Govee_H5179_SdB',
             },
         ],
         CONF_LOG_SPIKES: False,
