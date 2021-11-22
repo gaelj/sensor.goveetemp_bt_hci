@@ -1,5 +1,6 @@
 """Govee BLE monitor integration."""
 from datetime import time, timedelta
+from time import sleep
 import logging
 from typing import List, Optional, Dict, Set, Tuple
 
@@ -167,7 +168,7 @@ def setup_platform(config) -> None:
         # update_ble_loop() will be called again after time_offset
         # track_point_in_utc_time(update_ble_loop, time_offset)
 
-        time.sleep(config[CONF_PERIOD])
+        sleep(config[CONF_PERIOD])
         update_ble_loop()
 
     ###########################################################################
