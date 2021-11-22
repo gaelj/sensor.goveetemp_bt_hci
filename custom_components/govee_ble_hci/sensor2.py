@@ -147,7 +147,7 @@ def setup_platform(config) -> None:
                     last_packet = device.last_packet
                     getattr(sensor, ATTR)["last packet id"] = last_packet
                     getattr(sensor, ATTR)["rssi"] = device.rssi
-                    getattr(sensor, ATTR)[ATTR_BATTERY_LEVEL] = device.battery
+                    sensor._battery = device.battery
                     getattr(sensor, ATTR)[textattr] = device.data_size
                     sensor.async_schedule_update_ha_state()
 
