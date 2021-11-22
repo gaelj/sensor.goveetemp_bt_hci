@@ -3,7 +3,7 @@ from typing import List, Optional, Union
 import statistics as sts
 import logging
 
-from .const import (
+from const import (
     DEFAULT_TEMP_RANGE_MIN,
     DEFAULT_TEMP_RANGE_MAX,
     CONF_HMIN,
