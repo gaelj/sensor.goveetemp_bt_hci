@@ -149,7 +149,7 @@ def setup_platform(config) -> None:
                     getattr(sensor, ATTR)["rssi"] = device.rssi
                     sensor._battery = device.battery
                     getattr(sensor, ATTR)[textattr] = device.data_size
-                    sensor.async_schedule_update_ha_state()
+                    # sensor.async_schedule_update_ha_state()
 
                 device.reset()
 
