@@ -142,14 +142,14 @@ def setup_platform(config) -> None:
                     getattr(sensors[0], ATTR)["median"] = tempstate_med
                     if use_median:
                         setattr(sensors[0], "_state", tempstate_med)
-                    _LOGGER.debug(f"Median temperature {sensors[1].name}: {tempstate_med}%")
+                    _LOGGER.debug(f"Median temperature {sensors[1].name}: {tempstate_med}°C")
 
                 if device.mean_temperature is not None:
                     tempstate_mean = float(device.mean_temperature)
                     getattr(sensors[0], ATTR)["mean"] = tempstate_mean
                     if not use_median:
                         setattr(sensors[0], "_state", tempstate_mean)
-                    _LOGGER.debug(f"Mean temperature {sensors[1].name}: {tempstate_mean}%")
+                    _LOGGER.debug(f"Mean temperature {sensors[1].name}: {tempstate_mean}°C")
 
                 for sensor in sensors:
                     last_packet = device.last_packet
@@ -158,7 +158,7 @@ def setup_platform(config) -> None:
                     sensor._battery = device.battery
                     getattr(sensor, ATTR)[textattr] = device.data_size
                     # sensor.async_schedule_update_ha_state()
-                    _LOGGER.debug(f"RSSI {sensor.name}: {device.rssi}")
+                    _LOGGER.debug(f"RSSI {sensor.name}: {device.rssi}dB")
                     _LOGGER.debug(f"Battery {sensor.name}: {device.battery}%")
 
                 device.reset()
