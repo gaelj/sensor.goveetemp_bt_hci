@@ -1,7 +1,6 @@
 """Govee BLE monitor integration."""
 from datetime import time, timedelta
 import logging
-import voluptuous as vol
 from typing import List, Optional, Dict, Set, Tuple
 
 from bleson import get_provider  # type: ignore
