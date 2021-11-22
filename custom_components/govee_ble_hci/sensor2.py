@@ -106,7 +106,7 @@ def setup_platform(config) -> None:
 
     def update_ble_devices(config) -> None:
         """Discover Bluetooth LE devices."""
-        _LOGGER.debug("Discovering Bluetooth LE devices")
+        # _LOGGER.debug("Discovering Bluetooth LE devices")
         use_median = config[CONF_USE_MEDIAN]
 
         ATTR = "_device_state_attributes"
