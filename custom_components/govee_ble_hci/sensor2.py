@@ -115,11 +115,12 @@ def setup_platform(config) -> None:
         for device in govee_devices:
             sensors = sensors_by_mac[device.mac]
 
-            _LOGGER.debug(
-                "Last mfg data for {}: {}".format(
-                    BDAddress(device.mac), device.last_packet
+            if device.last_packet is not None:
+                _LOGGER.debug(
+                    "Last mfg data for {}: {}".format(
+                        BDAddress(device.mac), device.last_packet
+                    )
                 )
-            )
 
             if device.last_packet:
                 if device.median_humidity is not None:
@@ -158,7 +159,7 @@ def setup_platform(config) -> None:
 
     def update_ble_loop() -> None:
         """Lookup Bluetooth LE devices and update status."""
-        _LOGGER.debug("update_ble_loop called")
+        # _LOGGER.debug("update_ble_loop called")
         adapter.start_scanning()
 
         try:
