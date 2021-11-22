@@ -161,6 +161,8 @@ def setup_platform(config) -> None:
                     _LOGGER.debug(f"RSSI {sensor.name}: {device.rssi}dB")
                     _LOGGER.debug(f"Battery {sensor.name}: {device.battery}%")
 
+                _LOGGER.debug("")
+
                 device.reset()
 
     def update_ble_loop() -> None:
