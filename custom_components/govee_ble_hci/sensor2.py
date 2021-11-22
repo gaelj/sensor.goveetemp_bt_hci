@@ -158,8 +158,8 @@ def setup_platform(config) -> None:
                     sensor._battery = device.battery
                     getattr(sensor, ATTR)[textattr] = device.data_size
                     # sensor.async_schedule_update_ha_state()
-                    _LOGGER.debug(f"RSSI {sensor.name}: {device.rssi}dB")
-                    _LOGGER.debug(f"Battery {sensor.name}: {device.battery}%")
+                _LOGGER.debug(f"RSSI {sensor.name}: {device.rssi}dB")
+                _LOGGER.debug(f"Battery {sensor.name}: {device.battery}%")
 
                 _LOGGER.debug("")
 
