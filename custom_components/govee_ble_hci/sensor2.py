@@ -128,28 +128,28 @@ def setup_platform(config) -> None:
                     getattr(sensors[1], ATTR)["median"] = humstate_med
                     if use_median:
                         setattr(sensors[1], "_state", humstate_med)
-                    _LOGGER.debug(f"Median humidity {sensors[1].name}: {humstate_med}%")
+                        _LOGGER.debug(f"Median humidity {sensors[1].name}: {humstate_med}%")
 
                 if device.mean_humidity is not None:
                     humstate_mean = float(device.mean_humidity)
                     getattr(sensors[1], ATTR)["mean"] = humstate_mean
                     if not use_median:
                         setattr(sensors[1], "_state", humstate_mean)
-                    _LOGGER.debug(f"Mean humidity {sensors[1].name}: {humstate_mean}%")
+                        _LOGGER.debug(f"Mean humidity {sensors[1].name}: {humstate_mean}%")
 
                 if device.median_temperature is not None:
                     tempstate_med = float(device.median_temperature)
                     getattr(sensors[0], ATTR)["median"] = tempstate_med
                     if use_median:
                         setattr(sensors[0], "_state", tempstate_med)
-                    _LOGGER.debug(f"Median temperature {sensors[1].name}: {tempstate_med}°C")
+                        _LOGGER.debug(f"Median temperature {sensors[1].name}: {tempstate_med}°C")
 
                 if device.mean_temperature is not None:
                     tempstate_mean = float(device.mean_temperature)
                     getattr(sensors[0], ATTR)["mean"] = tempstate_mean
                     if not use_median:
                         setattr(sensors[0], "_state", tempstate_mean)
-                    _LOGGER.debug(f"Mean temperature {sensors[1].name}: {tempstate_mean}°C")
+                        _LOGGER.debug(f"Mean temperature {sensors[1].name}: {tempstate_mean}°C")
 
                 for sensor in sensors:
                     last_packet = device.last_packet
@@ -158,10 +158,7 @@ def setup_platform(config) -> None:
                     sensor._battery = device.battery
                     getattr(sensor, ATTR)[textattr] = device.data_size
                     # sensor.async_schedule_update_ha_state()
-                _LOGGER.debug(f"RSSI {sensor.name}: {device.rssi}dB")
-                _LOGGER.debug(f"Battery {sensor.name}: {device.battery}%")
-
-                _LOGGER.debug("")
+                _LOGGER.debug(f"{sensor.name} RSSI: {device.rssi}dB Battery: {device.battery}%\n")
 
                 device.reset()
 
