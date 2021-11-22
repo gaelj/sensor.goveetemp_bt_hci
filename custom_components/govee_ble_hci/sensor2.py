@@ -35,8 +35,11 @@ from ble_ht import BLE_HT_data
 
 ###############################################################################
 
-_LOGGER = logging.getLogger(__name__)
+# _LOGGER = logging.getLogger(__name__)
 
+class _LOGGER:
+    def debug(text):
+        print(text)
 
 ###############################################################################
 
