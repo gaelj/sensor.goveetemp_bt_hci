@@ -347,6 +347,6 @@ if __name__ == "__main__":
         CONF_TEMP_RANGE_MIN_CELSIUS: 0,
         CONF_USE_MEDIAN: True,
         CONF_HCI_DEVICE: 'hci0',
-        CONF_PERIOD: '1',
+        CONF_PERIOD: 1,
     }
     setup_platform(config)
