@@ -7,7 +7,8 @@ from typing import List, Optional, Dict, Set, Tuple
 from bleson import get_provider  # type: ignore
 from bleson.core.hci.constants import EVT_LE_ADVERTISING_REPORT  # type: ignore
 from bleson.core.types import BDAddress  # type: ignore
-from bleson.core.hci.type_converters import hex_string  # type: ignore
+from bleson.core.hci.type_converters import hex_string
+from bleson.providers.linux.linux_adapter import BluetoothHCIAdapter  # type: ignore
 
 from const import (
     CONF_DECIMALS,
@@ -52,7 +53,7 @@ class govee_sensor:
         _LOGGER.debug("Starting Govee HCI Sensor")
         self.govee_devices: List[BLE_HT_data] = []  # Data objects of configured devices
         self.sensors_by_mac: Dict[str, List[MeasurementSensor]] = {}  # HomeAssistant sensors by MAC address
-        self.adapter = None
+        self.adapter: BluetoothHCIAdapter = None
 
     def setup_platform(self, config) -> None:
         self.config = config
@@ -172,10 +173,10 @@ class govee_sensor:
         # Initialize bluetooth adapter and begin scanning
         # XXX: will not work if there are more than 10 HCI devices
         try:
-            adapter = get_provider().get_adapter(int(self.config[CONF_HCI_DEVICE][-1]))
-            adapter._handle_meta_event = self.handle_meta_event
+            self.adapter = get_provider().get_adapter(int(self.config[CONF_HCI_DEVICE][-1]))
+            self.adapter._handle_meta_event = self.handle_meta_event
             # hass.bus.listen("homeassistant_stop", adapter.stop_scanning)
-            adapter.start_scanning()
+            self.adapter.start_scanning()
         except (RuntimeError, OSError, PermissionError) as error:
             error_msg = "Error connecting to Bluetooth adapter: {}\n\n".format(error)
             error_msg += "Bluetooth adapter troubleshooting:\n"
