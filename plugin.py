@@ -64,7 +64,7 @@ For more details, see [Using Python Plugins](https://www.domoticz.com/wiki/Using
 </plugin>
 """
 
-from typing import List
+from typing import Dict, List
 import Domoticz
 from datetime import date, datetime, timedelta
 import time
@@ -73,12 +73,12 @@ from DomoticzPluginHelper import DomoticzPluginHelper
 import sensor2
 
 z: DomoticzPluginHelper = None
-pluginDevices = None
 
 class PluginConfig:
     """Plugin configuration (singleton)"""
 
     def __init__(self):
+        global z
         self.macs = [
             {
                 'mac': z.Parameters.Mode2,
@@ -95,7 +95,9 @@ class PluginConfig:
                 'mac': z.Parameters.Mode6,
                 'name': z.Parameters.Mode7,
             },)
-        sensor2.setup_platform_by_macs(self.macs)
+        for x in self.macs:
+            z.WriteLog(f"mac: {x['mac']}: {x['name']}")
+        #sensor2.setup_platform_by_macs(self.macs)
 
 
 class DeviceUnits(IntEnum):
@@ -106,6 +108,7 @@ class PluginDevices:
     def __init__(self):
         self.config = PluginConfig()
 
+pluginDevices: PluginDevices = None
 
 
 def onStart():
@@ -139,9 +142,11 @@ def onStart():
     for x in pluginDevices.config.macs:
         mac = x['mac']
         name = x['name']
-        z.InitDevice(f'Govee Temp / Hum {name}', i,
+        z.InitDevice(f'Temp-Hum {name}', i,
                     DeviceType=TempHumDomoticzDeviceType,
-                    Used=True)
+                    Used=True,
+                    defaultNValue=0,
+                    defaultSValue="0")
         i += 1
 
 def onStop():
@@ -160,14 +165,14 @@ def onHeartbeat():
     global z
     global pluginDevices
     z.onHeartbeat()
-    sensor2.update_ble_loop()
-    i = 1
-    for x in pluginDevices.config.macs:
-        mac = x['mac']
-        name = x['name']
-        temp = sensor2.s.sensors_by_mac[mac][0].value
-        hum = sensor2.s.sensors_by_mac[mac][1].value
-        rssi = sensor2.s.sensors_by_mac[mac][0].rssi
-        battery = sensor2.s.sensors_by_mac[mac][0].battery
-        z.Devices[i].Update(BatteryLevel=battery * 255, SignalLevel=rssi * 255)
-        i += 1
+    #sensor2.update_ble_loop()
+    #i = 1
+    #for x in pluginDevices.config.macs:
+    #    mac = x['mac']
+    #    name = x['name']
+    #    temp = sensor2.s.sensors_by_mac[mac][0].value
+    #    hum = sensor2.s.sensors_by_mac[mac][1].value
+    #    rssi = sensor2.s.sensors_by_mac[mac][0].rssi
+    #    battery = sensor2.s.sensors_by_mac[mac][0].battery
+    #    z.Devices[i].Update(BatteryLevel=battery * 255, SignalLevel=rssi * 255)
+    #    i += 1
