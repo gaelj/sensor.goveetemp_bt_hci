@@ -10,7 +10,13 @@ from const import (
     CONF_HMAX,
 )
 
-_LOGGER = logging.getLogger(__name__)
+# _LOGGER = logging.getLogger(__name__)
+
+class _LOGGER:
+    def debug(text):
+        print(text)
+    def error(text):
+        print(text)
 
 
 class BLE_HT_packet:
