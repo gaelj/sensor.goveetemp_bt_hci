@@ -111,21 +111,22 @@ class PluginDevices:
 def onStart():
     global z
     global pluginDevices
+
     # prod
     from DomoticzWrapperClass import \
+         DomoticzTypeName, DomoticzDebugLevel, DomoticzPluginParameters, \
+         DomoticzWrapper, DomoticzDevice, DomoticzConnection, DomoticzImage, \
+         DomoticzDeviceType
+    from DomoticzPluginHelper import \
+        DomoticzPluginHelper, DeviceParam, ParseCSV, DomoticzDeviceTypes
 
     # dev
     # from DomoticzWrapper.DomoticzWrapperClass import \
     #     DomoticzTypeName, DomoticzDebugLevel, DomoticzPluginParameters, \
     #     DomoticzWrapper, DomoticzDevice, DomoticzConnection, DomoticzImage, \
     #     DomoticzDeviceType
-
-    # dev
     # from DomoticzWrapper.DomoticzPluginHelper import \
     #     DomoticzPluginHelper, DeviceParam, ParseCSV, DomoticzDeviceTypes
-    # prod
-    from DomoticzPluginHelper import \
-        DomoticzPluginHelper, DeviceParam, ParseCSV, DomoticzDeviceTypes
 
     z = DomoticzPluginHelper(
         Domoticz, Settings, Parameters, Devices, Images, {})
