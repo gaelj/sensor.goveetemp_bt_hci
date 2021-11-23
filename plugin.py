@@ -70,7 +70,7 @@ from datetime import date, datetime, timedelta
 import time
 from enum import IntEnum
 from DomoticzPluginHelper import DomoticzPluginHelper
-from govee_ble_hci import sensor2
+import sensor2
 
 z: DomoticzPluginHelper = None
 pluginDevices = None
